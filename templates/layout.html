@@ -25,6 +25,12 @@
             </a>
             <p class="logo__text text-centered">A series of sedentary sediments</p>
         </div>
+        <div class="letters">
+            {% for l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
+            <span {% if letter == l %}class="disabled_letter"{% endif %}><a href="{% url 'minerals:mineral_letter' letter=l %}">{{ l }}</a></span> | 
+            {% endfor %}
+            <span {% if not letter %}class="disabled_letter"{% endif %}><a href="{% url 'minerals:mineral_list' %}">ALL</a></span>
+        </div>
         {% block content %}{% endblock %}
     </div>
     <div class="minerals__random">

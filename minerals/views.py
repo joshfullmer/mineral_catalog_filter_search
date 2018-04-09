@@ -34,7 +34,14 @@ def mineral_list(request):
     """Shows the entire list of minerals"""
     minerals = models.Mineral.objects.all()
     return render(request, 'minerals/mineral_list.html',
-                  {'minerals': minerals})
+                  {'minerals': minerals, 'letter': None})
+
+
+def mineral_letter(request, letter):
+    """Shows a list of minerals that start with the given letter"""
+    minerals = models.Mineral.objects.filter(name__startswith=letter)
+    return render(request, 'minerals/mineral_list.html',
+                  {'minerals': minerals, 'letter': letter})
 
 
 def mineral_detail(request, mineral_id):

@@ -7,4 +7,7 @@ urlpatterns = [
     url(r'^$', views.mineral_list, name='mineral_list'),
     url(r'(?P<mineral_id>\d+)/$', views.mineral_detail, name='mineral_detail'),
     url(r'random/', views.random_mineral, name='random_mineral'),
+    url(r'starting_with/(?P<letter>[A-Za-z])/$',
+        views.mineral_letter,
+        name='mineral_letter')
 ]
