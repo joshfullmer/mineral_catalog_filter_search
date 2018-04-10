@@ -9,5 +9,8 @@ urlpatterns = [
     url(r'random/', views.random_mineral, name='random_mineral'),
     url(r'starting_with/(?P<letter>[A-Za-z])/$',
         views.mineral_letter,
-        name='mineral_letter')
+        name='mineral_letter'),
+    url(r'by_group/(?P<group>[\w ]+)/$',
+        views.mineral_group,
+        name='mineral_group'),
 ]

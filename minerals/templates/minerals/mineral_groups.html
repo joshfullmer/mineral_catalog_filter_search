@@ -1,0 +1,3 @@
+{% for group in groups %}
+<span {% if group == current_group %}class="disabled_letter"{% endif %}><a href="{% url 'minerals:mineral_group' group=group %}">{{ group }}</a></span>{% if groups|last != group %} | {% endif %}
+{% endfor %}

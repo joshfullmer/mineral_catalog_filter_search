@@ -44,6 +44,13 @@ def mineral_letter(request, letter):
                   {'minerals': minerals, 'letter': letter})
 
 
+def mineral_group(request, group):
+    """Shows a list of minerals that start with the given letter"""
+    minerals = models.Mineral.objects.filter(group=group)
+    return render(request, 'minerals/mineral_list.html',
+                  {'minerals': minerals, 'current_group': group})
+
+
 def mineral_detail(request, mineral_id):
     """Shows the detail view of a single mineral"""
 

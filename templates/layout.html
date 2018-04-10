@@ -1,4 +1,5 @@
 {% load static %}
+{% load minerals_extras %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +28,12 @@
         </div>
         <div class="letters">
             {% for l in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" %}
-            <span {% if letter == l %}class="disabled_letter"{% endif %}><a href="{% url 'minerals:mineral_letter' letter=l %}">{{ l }}</a></span> | 
+            <span {% if letter == l %}class="disabled_letter"{% endif %}><a href="{% url 'minerals:mineral_letter' letter=l %}">{{ l }}</a></span>
             {% endfor %}
-            <span {% if not letter %}class="disabled_letter"{% endif %}><a href="{% url 'minerals:mineral_list' %}">ALL</a></span>
+            <span><a href="{% url 'minerals:mineral_list' %}">ALL</a></span>
         </div>
+        <hr>
+        {% mineral_group_list current_group %}
         {% block content %}{% endblock %}
     </div>
     <div class="minerals__random">

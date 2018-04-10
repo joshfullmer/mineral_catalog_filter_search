@@ -38,7 +38,17 @@ class MineralTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(resp.context.get('mineral').get('name'), 'Abelsonite')
 
+    def test_last_detail_return(self):
+        """Tests the last mineral, to make sure the next and prev buttons
+        are generated appropriately"""
+        resp = self.c.get('/minerals/874/')
+        self.assertIsNotNone(resp.context.get('mineral'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.context.get('mineral').get('name'), 'Zunyite')
+
     def test_random_detail_return(self):
+        """Tests that the random link will return different minerals randomly
+        and most likely not the same"""
         mineral_ids = set()
         # Run the random mineral page 20 times, as it's unlikely that 20 random
         # integers from a pool of 850 will all be the same
@@ -46,3 +56,17 @@ class MineralTestCase(TestCase):
             resp = self.c.get('/minerals/random/')
             mineral_ids.add(resp.context.get('mineral').get('id'))
         self.assertGreater(len(mineral_ids), 1)
+
+    def test_list_by_letter(self):
+        """Tests that a list can be filtered by letter"""
+        resp = self.c.get('/minerals/starting_with/A/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.context.get('minerals'))
+        self.assertEqual(len(resp.context.get('minerals')), 90)
+
+    def test_list_by_group(self):
+        """Tests that a list can be filtered by group"""
+        resp = self.c.get('/minerals/by_group/Arsenates/')
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.context.get('minerals'))
+        self.assertEqual(len(resp.context.get('minerals')), 44)
