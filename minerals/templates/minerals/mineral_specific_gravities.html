@@ -1,0 +1,3 @@
+{% for specific_gravity in specific_gravities %}
+<span {% if specific_gravity == current_specific_gravity %}class="disabled_letter"{% endif %}><a href="{% url 'minerals:mineral_specific_gravity' specific_gravity=specific_gravity %}">{{ specific_gravity }}</a></span>{% if specific_gravities|last != specific_gravity %} | {% endif %}
+{% endfor %}

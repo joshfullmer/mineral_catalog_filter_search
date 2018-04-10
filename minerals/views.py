@@ -35,7 +35,7 @@ def mineral_list(request):
     """Shows the entire list of minerals"""
     minerals = models.Mineral.objects.all()
     return render(request, 'minerals/mineral_list.html',
-                  {'minerals': minerals, 'letter': None})
+                  {'minerals': minerals})
 
 
 def mineral_letter(request, letter):
@@ -46,10 +46,18 @@ def mineral_letter(request, letter):
 
 
 def mineral_group(request, group):
-    """Shows a list of minerals that start with the given letter"""
+    """Shows a list of minerals that are in the given group"""
     minerals = models.Mineral.objects.filter(group=group)
     return render(request, 'minerals/mineral_list.html',
                   {'minerals': minerals, 'current_group': group})
+
+
+def mineral_specific_gravity(request, specific_gravity):
+    """Shows a list of minerals that have the given specific gravity"""
+    minerals = models.Mineral.objects.filter(specific_gravity=specific_gravity)
+    return render(request, 'minerals/mineral_list.html',
+                  {'minerals': minerals,
+                   'current_specific_gravity': specific_gravity})
 
 
 def mineral_search(request):

@@ -37,3 +37,16 @@ def mineral_group_list(current_group=None):
     groups = list(groups)
     groups.sort()
     return {'groups': groups, 'current_group': current_group}
+
+
+@register.inclusion_tag('minerals/mineral_specific_gravities.html')
+def mineral_specific_gravity_list(current_specific_gravity=None):
+    specific_gravities = (Mineral.objects
+                                 .values_list('specific_gravity', flat=True)
+                                 .distinct())
+    specific_gravities = list(specific_gravities)
+    specific_gravities.sort()
+    if not specific_gravities[0]:
+        specific_gravities = specific_gravities[1:]
+    return {'specific_gravities': specific_gravities,
+            'current_specific_gravity': current_specific_gravity}
