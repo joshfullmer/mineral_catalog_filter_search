@@ -31,6 +31,10 @@
             <span {% if letter == l %}class="disabled_letter"{% endif %}><a href="{% url 'minerals:mineral_letter' letter=l %}">{{ l }}</a></span>
             {% endfor %}
             <span><a href="{% url 'minerals:mineral_list' %}">ALL</a></span>
+            <form type="get" action="minerals/search/" style="display:inline-block;white-space:nowrap;">
+                <input id="search" type="text" name="q" placeholder="Search..." style="width:90%;">
+                <button id="search_submit" type="submit">Search</button>
+            </form>
         </div>
         <hr>
         {% mineral_group_list current_group %}

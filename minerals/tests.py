@@ -70,3 +70,10 @@ class MineralTestCase(TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertIsNotNone(resp.context.get('minerals'))
         self.assertEqual(len(resp.context.get('minerals')), 44)
+
+    def test_search(self):
+        """Tests that a list will be returned by search criteria"""
+        resp = self.c.get('/minerals/search/?q=jo')
+        self.assertEqual(resp.status_code, 200)
+        self.assertIsNotNone(resp.context.get('minerals'))
+        self.assertEqual(len(resp.context.get('minerals')), 10)

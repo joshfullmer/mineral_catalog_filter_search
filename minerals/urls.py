@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'by_group/(?P<group>[\w ]+)/$',
         views.mineral_group,
         name='mineral_group'),
+    url(r'search/', views.mineral_search, name='mineral_search'),
 ]

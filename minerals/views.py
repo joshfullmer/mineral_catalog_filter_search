@@ -1,5 +1,6 @@
 import random
 
+from django.db.models import CharField, Q
 from django.db.models.aggregates import Count
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404, render
@@ -49,6 +50,22 @@ def mineral_group(request, group):
     minerals = models.Mineral.objects.filter(group=group)
     return render(request, 'minerals/mineral_list.html',
                   {'minerals': minerals, 'current_group': group})
+
+
+def mineral_search(request):
+    """Shows a list of minerals that contain the search term"""
+    search_term = request.GET.get('q')
+    fields = [f for f in models.Mineral._meta.fields
+              if isinstance(f, CharField)]
+    queries = [Q(**{(f.name + '__icontains'): search_term}) for f in fields]
+
+    qs = Q()
+    for query in queries:
+        qs = qs | query
+
+    minerals = models.Mineral.objects.filter(qs)
+    return render(request, 'minerals/mineral_list.html',
+                  {'minerals': minerals})
 
 
 def mineral_detail(request, mineral_id):

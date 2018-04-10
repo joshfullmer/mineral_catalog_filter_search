@@ -1,0 +1,5 @@
+.coverage
+.coveragerc
+db.sqlite3
+setup.cfg
+.DS_Store
