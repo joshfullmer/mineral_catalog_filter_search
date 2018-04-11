@@ -1,3 +1,17 @@
-{% for specific_gravity in specific_gravities %}
-<span {% if specific_gravity == current_specific_gravity %}class="disabled_letter"{% endif %}><a href="{% url 'minerals:mineral_specific_gravity' specific_gravity=specific_gravity %}">{{ specific_gravity }}</a></span>{% if specific_gravities|last != specific_gravity %} | {% endif %}
-{% endfor %}
+<span>Specific Gravity: </span>
+<select id="specific_gravity_select">
+    <option>---</option>
+    {% for specific_gravity in specific_gravities %}
+    <option {% if current_specific_gravity == specific_gravity %}disabled{% endif %}>{{ specific_gravity }}</option>
+    {% endfor %}
+</select>
+
+<script>
+    $(document).ready(function() {
+        $("#specific_gravity_select").change(function() {
+            var spec_grav = document.getElementById('specific_gravity_select');
+            var spec_grav_text = spec_grav.options[spec_grav.selectedIndex].innerHTML;
+            window.location.href = "/minerals/by_specific_gravity/" + spec_grav_text + "/"
+        });
+    });
+</script>
