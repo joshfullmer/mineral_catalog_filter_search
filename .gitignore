@@ -3,3 +3,4 @@
 db.sqlite3
 setup.cfg
 .DS_Store
+__pycache__

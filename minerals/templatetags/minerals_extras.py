@@ -41,6 +41,7 @@ def mineral_group_list(current_group=None):
 
 @register.inclusion_tag('minerals/mineral_specific_gravities.html')
 def mineral_specific_gravity_list(current_specific_gravity=None):
+    """Returns dict of mineral specific gravities to display in filter"""
     specific_gravities = (Mineral.objects
                                  .values_list('specific_gravity', flat=True)
                                  .distinct())
